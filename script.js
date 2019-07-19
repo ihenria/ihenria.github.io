@@ -11,28 +11,28 @@ async function init() {
 }
 
 function set(n) {
-	d3.select(".chart").html() = "";
+	d3.select(".chart").html = "";
 	if (n == 1) {
-		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
+		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
 	
 	if (n == 2) {
-		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
+		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
 	
 	if (n == 3) {
-		d3.select(".chart").selectAll("rect").data(data2005).enter().append("rect").attr("width", 19);
+		d3.select(".chart").selectAll("rect").data(data2005).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
 	
 	if (n == 4) {
-		d3.select(".chart").selectAll("rect").data(data2010).enter().append("rect").attr("width", 19);
+		d3.select(".chart").selectAll("rect").data(data2010).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
 	
 	if (n == 5) {
-		d3.select(".chart").selectAll("rect").data(data2015).enter().append("rect").attr("width", 19);
+		d3.select(".chart").selectAll("rect").data(data2015).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
 	
 	if (n == 6) {
-		d3.select(".chart").selectAll("rect").data(data2017).enter().append("rect").attr("width", 19);
+		d3.select(".chart").selectAll("rect").data(data2017).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
 }
