@@ -7,14 +7,32 @@ async function init() {
 	const data2017 = await d3.csv("data/2017.csv");
 	console.log(data2000);
 	
-	d3.select("chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
+	d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
 }
 
 function set(n) {
-	d3.select("chart").html() = "";
+	d3.select(".chart").html() = "";
 	if (n == 1) {
+		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
 	}
 	
 	if (n == 2) {
+		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
+	}
+	
+	if (n == 3) {
+		d3.select(".chart").selectAll("rect").data(data2005).enter().append("rect").attr("width", 19);
+	}
+	
+	if (n == 4) {
+		d3.select(".chart").selectAll("rect").data(data2010).enter().append("rect").attr("width", 19);
+	}
+	
+	if (n == 5) {
+		d3.select(".chart").selectAll("rect").data(data2015).enter().append("rect").attr("width", 19);
+	}
+	
+	if (n == 6) {
+		d3.select(".chart").selectAll("rect").data(data2017).enter().append("rect").attr("width", 19);
 	}
 }
