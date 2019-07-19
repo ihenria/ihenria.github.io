@@ -5,6 +5,7 @@ async function init() {
 	const data2010 = await d3.csv("data/2010.csv");
 	const data2015 = await d3.csv("data/2015.csv");
 	const data2017 = await d3.csv("data/2017.csv");
+	console.log(data2000);
 	
 	d3.select("chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
 }
