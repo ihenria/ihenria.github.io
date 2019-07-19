@@ -1,6 +1,5 @@
 async function init() {
 	const overall = await d3.csv("data/overall.csv");
-	const data1995 = await d3.csv("data/1995.csv");
 	const data2000 = await d3.csv("data/2000.csv");
 	const data2005 = await d3.csv("data/2005.csv");
 	const data2010 = await d3.csv("data/2010.csv");
