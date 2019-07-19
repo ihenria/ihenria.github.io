@@ -6,9 +6,14 @@ async function init() {
 	const data2015 = await d3.csv("data/2015.csv");
 	const data2017 = await d3.csv("data/2017.csv");
 	
-	d3.select("chart").selectAll("rect").data(data2000).enter().append().attr("width", 19);
+	d3.select("chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19);
 }
 
 function set(n) {
-	alert(n);
+	d3.select("chart").html() = "";
+	if (n == 1) {
+	}
+	
+	if (n == 2) {
+	}
 }
