@@ -7,7 +7,9 @@ async function init() {
 	const data2017 = await d3.csv("data/2017.csv");
 	console.log(data2000);
 	
-	d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
+	var x = d3.scaleLinear().domain([0, 100000000]).range([0, 300]);
+	d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals);})
+	.attr("height", 30).attr("y", function(d, i) {return i * 40;});
 }
 
 function set(n) {
