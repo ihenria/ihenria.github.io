@@ -1,4 +1,5 @@
 var x = d3.scaleLinear().domain([0, 100000000]).range([0, 500]);
+var slide = 1;
 
 var data2010, data2015, data2010, data2015, data2017, overall;
 			
@@ -19,7 +20,7 @@ async function init() {
 	.attr("height", 20).attr("y", function(d, i) {return i * 30;});
 	
 	var items = [], i;
-	for (i = 0, i < 20; i++) { 
+	for (i = 0; i < 20; i++) { 
 		items.push(data2000[i].Country);
 	}
 	var y = d3.scaleOrdinal().domain(items).range([0, 500]);
@@ -29,6 +30,7 @@ async function init() {
 }
 			
 function set(n) {
+	slide = n;
 	d3.select(".chart").html("");
 	var i;
 	for (i = 1; i <= 6; i++) { 
@@ -58,5 +60,19 @@ function set(n) {
 	
 	if (n == 6) {
 		d3.select(".chart").selectAll("rect").data(data2017).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
+	}
+}
+
+function next() {
+	if (slide < 6) {
+		slide++;
+		set(slide);
+	}
+}
+
+function previous() {
+	if (slide > 1) {
+		slide--;
+		set(slide);
 	}
 }
