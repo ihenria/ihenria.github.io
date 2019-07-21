@@ -1,19 +1,23 @@
 var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
 var slide = 1;
-
-var data2010, data2015, data2010, data2015, data2017;
+var overall = [];
 
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
 		
 async function init() {
-	data2000 = await d3.csv("data/2000.csv");
-	data2005 = await d3.csv("data/2005.csv");
-	data2010 = await d3.csv("data/2010.csv");
-	data2015 = await d3.csv("data/2015.csv");
-	data2017 = await d3.csv("data/2017.csv");
+	var data2000 = await d3.csv("data/2000.csv");
+	var data2005 = await d3.csv("data/2005.csv");
+	var data2010 = await d3.csv("data/2010.csv");
+	var data2015 = await d3.csv("data/2015.csv");
+	var data2017 = await d3.csv("data/2017.csv");
 	
+	overall.push(data2000);
+	overall.push(data2005);
+	overall.push(data2010);
+	overall.push(data2015);
+	overall.push(data2017);
 	draw();
 }
 
@@ -23,7 +27,7 @@ function draw(n) {
             .attr("height", 450)
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
-	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
+	svg.selectAll("rect").data(overall[n-1]).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
 	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
             div.transition()		
                 .duration(200)		
@@ -47,9 +51,9 @@ function draw(n) {
 	d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
 	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
 	
-	svg.append("rect").attr({"cx": 500, "cy": 500, "width": 10, "height": 10}).style("fill", "#4C5270")
-	svg.append("rect").attr({"cx": 500, "cy": 520, "width": 10, "height": 10}).style("fill", "#F652A0")
-	svg.append("rect").attr({"cx": 500, "cy": 540, "width": 10, "height": 10}).style("fill", "#36EEE0")
+	svg.append("rect").attr("cx", 500).attr("cy", 500).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
+	svg.append("rect").attr("cx", 500).attr("cy", 520).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
+	svg.append("rect").attr("cx", 500).attr("cy", 540).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
 	svg.append("text").attr("x", 515).attr("y", 500).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
 	svg.append("text").attr("x", 515).attr("y", 520).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
 	svg.append("text").attr("x", 515).attr("y", 540).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
