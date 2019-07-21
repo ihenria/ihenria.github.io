@@ -29,6 +29,7 @@ function draw(n) {
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
 	svg.selectAll("rect").data(overall[n-1]).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
 	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
+			console.log("hovered" + d);
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
@@ -50,16 +51,16 @@ function draw(n) {
 	
 	d3.select(".chart").append("g").attr("transform", "translate(50, 400)").call(d3.axisBottom(x));
 	d3.select(".chart").append("g").attr("transform", "translate(50, 440)").text("Units in millions");
-	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
+	d3.select(".chart").append("g").attr("transform", "translate(50, 0)").call(d3.axisLeft(y));
 	
-	svg.append("rect").attr("cx", 400).attr("cy", 300).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
-	svg.append("rect").attr("cx", 400).attr("cy", 320).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
-	svg.append("rect").attr("cx", 400).attr("cy", 340).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
-	svg.append("rect").attr("cx", 400).attr("cy", 360).attr("width", 10).attr("height", 10).style("fill", "#BCECE0")
-	svg.append("text").attr("x", 415).attr("y", 300).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 415).attr("y", 320).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 415).attr("y", 340).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 415).attr("y", 360).text("Latin America & Caribbean").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("rect").attr("x", 300).attr("y", 300).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
+	svg.append("rect").attr("x", 300).attr("y", 320).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
+	svg.append("rect").attr("x", 300).attr("y", 340).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
+	svg.append("rect").attr("x", 300).attr("y", 360).attr("width", 10).attr("height", 10).style("fill", "#BCECE0")
+	svg.append("text").attr("x", 315).attr("y", 300).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 315).attr("y", 320).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 315).attr("y", 340).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 315).attr("y", 360).text("Latin America & Caribbean").style("font-size", "15px").attr("alignment-baseline","middle")
 }
 			
 function set(n) {
