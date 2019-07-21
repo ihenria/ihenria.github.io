@@ -17,6 +17,7 @@ async function init() {
 			
 function set(n) {
 	d3.select(".chart").html = "";
+	svg.select("#btn" + n).addClass("active");
 	if (n == 1) {
 		svg.selectAll("rect").data(data2000).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
@@ -40,4 +41,5 @@ function set(n) {
 	if (n == 6) {
 		svg.selectAll("rect").data(data2017).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
 	}
+	d3.
 }
