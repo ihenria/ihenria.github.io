@@ -23,8 +23,8 @@ body {
 div.tooltip {	
     position: absolute;			
     text-align: center;			
-    width: 90px;					
-    height: 60px;					
+    width: 150px;					
+    height: 100px;					
     padding: 2px;				
     font: 12px sans-serif;		
     background: lightblue;	

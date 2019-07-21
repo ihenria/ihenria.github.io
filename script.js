@@ -44,7 +44,7 @@ function draw(n) {
         });
 	
 	d3.select(".chart").append("g").attr("transform", "translate(70, 400)").call(d3.axisBottom(x));
-	d3.select(".chart").append("text").attr("x", 150).attr("y", 420).text("Units in millions");
+	d3.select(".chart").append("text").attr("x", 220).attr("y", 460).text("Arrivals (Units in millions)");
 	d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
 	
 	svg.append("rect").attr("x", 300).attr("y", 250).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
