@@ -18,7 +18,7 @@ async function init() {
 	overall.push(data2010);
 	overall.push(data2015);
 	overall.push(data2017);
-	draw();
+	draw(1);
 }
 
 function draw(n) {
@@ -51,12 +51,12 @@ function draw(n) {
 	d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
 	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
 	
-	svg.append("rect").attr("cx", 500).attr("cy", 500).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
-	svg.append("rect").attr("cx", 500).attr("cy", 520).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
-	svg.append("rect").attr("cx", 500).attr("cy", 540).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
-	svg.append("text").attr("x", 515).attr("y", 500).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 515).attr("y", 520).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 515).attr("y", 540).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("rect").attr("cx", 400).attr("cy", 300).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
+	svg.append("rect").attr("cx", 400).attr("cy", 320).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
+	svg.append("rect").attr("cx", 400).attr("cy", 340).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
+	svg.append("text").attr("x", 415).attr("y", 300).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 415).attr("y", 320).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 415).attr("y", 340).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
 }
 			
 function set(n) {
