@@ -44,9 +44,9 @@ async function init() {
 	d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
 	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
 	
-	svg.append("rect").attrs({"cx": 500; "cy": 500; "width": 10; "height": 10}).style("fill", "#4C5270")
-	svg.append("rect").attrs({"cx": 500; "cy": 520; "width": 10; "height": 10}).style("fill", "#F652A0")
-	svg.append("rect").attrs({"cx": 500; "cy": 540; "width": 10; "height": 10}).style("fill", "#36EEE0")
+	svg.append("rect").attrs({"cx": 500, "cy": 500, "width": 10, "height": 10}).style("fill", "#4C5270")
+	svg.append("rect").attrs({"cx": 500, "cy": 520, "width": 10, "height": 10}).style("fill", "#F652A0")
+	svg.append("rect").attrs({"cx": 500, "cy": 540, "width": 10, "height": 10}).style("fill", "#36EEE0")
 	svg.append("text").attr("x", 515).attr("y", 500).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
 	svg.append("text").attr("x", 515).attr("y", 520).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
 	svg.append("text").attr("x", 515).attr("y", 540).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
