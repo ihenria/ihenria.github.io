@@ -1,11 +1,11 @@
 Country,Arrivals,Region,Income Group
-France,"82,682,000",Europe & Central Asia,High income
-United States,"76,407,000",North America,High income
-Spain,"75,315,000",Europe & Central Asia,High income
-China,"59,270,000",East Asia & Pacific,Upper middle income
-Italy,"52,372,000",Europe & Central Asia,High income
-United Kingdom,"35,814,000",Europe & Central Asia,High income
-Germany,"35,555,000",Europe & Central Asia,High income
-Mexico,"35,079,000",Latin America & Caribbean,Upper middle income
-Thailand,"32,530,000",East Asia & Pacific,Upper middle income
-Turkey,"30,289,000",Europe & Central Asia,Upper middle income
+France,82682000,Europe & Central Asia,High income
+United States,76407000,North America,High income
+Spain,75315000,Europe & Central Asia,High income
+China,59270000,East Asia & Pacific,Upper middle income
+Italy,52372000,Europe & Central Asia,High income
+United Kingdom,35814000,Europe & Central Asia,High income
+Germany,35555000,Europe & Central Asia,High income
+Mexico,35079000,Latin America & Caribbean,Upper middle income
+Thailand,32530000,East Asia & Pacific,Upper middle income
+Turkey,30289000,Europe & Central Asia,Upper middle income

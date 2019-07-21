@@ -1,6 +1,6 @@
 var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
 var overall = [];
-var div;
+var div, svg;
 		
 async function init() {
 	var data2000 = await d3.csv("data/2000.csv");
@@ -9,10 +9,8 @@ async function init() {
 	var data2015 = await d3.csv("data/2015.csv");
 	var data2017 = await d3.csv("data/2017.csv");
 	
-	overall.push(data2000);
-	overall.push(data2005);
-	overall.push(data2010);
 	overall.push(data2015);
+	overall.push(data2016);
 	overall.push(data2017);
 	
 	div = d3.select("body").append("div")	
@@ -23,7 +21,7 @@ async function init() {
 }
 
 function draw(n) {
-	var svg = d3.select(".chart").append("svg")
+	svg = d3.select(".chart").append("svg")
             .attr("width", 500)
             .attr("height", 400)
             .append("g")
@@ -31,7 +29,7 @@ function draw(n) {
 	svg.selectAll("rect").data(overall[n-1]).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
 	.attr("height", 25).attr("y", function(d, i) {return i * 35;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
             div.transition()		
-                .duration(200)		
+                .duration(20)		
                 .style("opacity", .9);		
             div.html("Name: " + d.Country + "<br/>"  + "Arrivals: " + d.Arrivals + "<br/>" + "Region: " + d.Region + "<br/>" + "Income Level: " + d.Income)	
                 .style("left", (d3.event.pageX) + "px")		
@@ -51,7 +49,7 @@ function draw(n) {
 	
 	var y = d3.scaleOrdinal().domain(items).range([0, 350]);
 	
-	d3.select(".chart").append("g").attr("transform", "translate(70, 0)").call(d3.axisLeft(y));
+	d3.select(".chart").append("g").attr("transform", "translate(70, 50)").call(d3.axisLeft(y));
 	d3.select(".chart").append("g").attr("transform", "translate(70, 400)").call(d3.axisBottom(x));
 	d3.select(".chart").append("text").attr("x", 220).attr("y", 460).text("Arrivals (Units in millions)");
 	//d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
@@ -69,6 +67,26 @@ function draw(n) {
 	if (n == 2) year = 2016;
 	if (n == 3) year = 2017;
 	svg.append("text").attr("x", 50).attr("y", 0).text("Top 10 Visited Countries in " + year).style("font-size", "20px");
+	annotate(n);
+}
+
+function annotate(n) {
+	if (n == 1) {
+		svg.append("circle").attr("cx", 300).attr("cy", 250).attr("r", 5);
+		var line = d3.svg.line()
+                    .x(function(d) { return d[0]; })
+                    .y(function(d) { return d[1]; })
+                    .interpolate('linear');
+		var shapeCoords = [
+                  [300, 250], [360, 250], [360, 300]               
+        ];
+		
+		svg.data(shapeCoords)
+                .append('path')
+                .attr('d', line(shapeCoords) + 'Z')
+                .style('stroke-width', 1)
+                .style('stroke', 'steelblue');
+	}
 }
 			
 function set(n) {
