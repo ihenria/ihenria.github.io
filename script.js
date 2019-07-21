@@ -44,7 +44,7 @@ function draw(n) {
 	
 	var items = [], i;
 	for (i = 0; i < 10; i++) { 
-		items.push(data2000[i].Country);
+		items.push(data[n-1][i].Country);
 	}
 	var y = d3.scaleOrdinal().domain(items).range([0, 500]);
 	
@@ -54,9 +54,11 @@ function draw(n) {
 	svg.append("rect").attr("cx", 400).attr("cy", 300).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
 	svg.append("rect").attr("cx", 400).attr("cy", 320).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
 	svg.append("rect").attr("cx", 400).attr("cy", 340).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
+	svg.append("rect").attr("cx", 400).attr("cy", 360).attr("width", 10).attr("height", 10).style("fill", "#BCECE0")
 	svg.append("text").attr("x", 415).attr("y", 300).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
 	svg.append("text").attr("x", 415).attr("y", 320).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
 	svg.append("text").attr("x", 415).attr("y", 340).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 415).attr("y", 360).text("Latin America & Caribbean").style("font-size", "15px").attr("alignment-baseline","middle")
 }
 			
 function set(n) {
