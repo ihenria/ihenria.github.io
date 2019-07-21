@@ -3,10 +3,8 @@ var overall = [];
 var div, svg;
 		
 async function init() {
-	var data2000 = await d3.csv("data/2000.csv");
-	var data2005 = await d3.csv("data/2005.csv");
-	var data2010 = await d3.csv("data/2010.csv");
 	var data2015 = await d3.csv("data/2015.csv");
+	var data2016 = await d3.csv("data/2016.csv");
 	var data2017 = await d3.csv("data/2017.csv");
 	
 	overall.push(data2015);
@@ -86,6 +84,46 @@ function annotate(n) {
                 .attr('d', line(shapeCoords) + 'Z')
                 .style('stroke-width', 1)
                 .style('stroke', 'steelblue');
+		
+		svg.append("text").attr("x", 315).attr("y", 320).text("France has consistently been the most visited countries in the world in recent years.").style("font-size", "15px");
+	}
+	
+	if (n == 2) {
+		svg.append("circle").attr("cx", 300).attr("cy", 250).attr("r", 5);
+		var line = d3.svg.line()
+                    .x(function(d) { return d[0]; })
+                    .y(function(d) { return d[1]; })
+                    .interpolate('linear');
+		var shapeCoords = [
+                  [300, 250], [360, 250], [360, 300]               
+        ];
+		
+		svg.data(shapeCoords)
+                .append('path')
+                .attr('d', line(shapeCoords) + 'Z')
+                .style('stroke-width', 1)
+                .style('stroke', 'steelblue');
+		
+		svg.append("text").attr("x", 315).attr("y", 320).text("Turkey sees a significant drop in number of arrivals, down 23.7% from 2016. It is also the only country with decreased visitors from 2015 to 2016.").style("font-size", "15px");
+	}
+	
+	if (n == 3) {
+		svg.append("circle").attr("cx", 300).attr("cy", 250).attr("r", 5);
+		var line = d3.svg.line()
+                    .x(function(d) { return d[0]; })
+                    .y(function(d) { return d[1]; })
+                    .interpolate('linear');
+		var shapeCoords = [
+                  [300, 250], [360, 250], [360, 300]               
+        ];
+		
+		svg.data(shapeCoords)
+                .append('path')
+                .attr('d', line(shapeCoords) + 'Z')
+                .style('stroke-width', 1)
+                .style('stroke', 'steelblue');
+		
+		svg.append("text").attr("x", 315).attr("y", 320).text("In 2017, Spain overtook the United States to become the #2 most visited country in the world").style("font-size", "15px");
 	}
 }
 			
