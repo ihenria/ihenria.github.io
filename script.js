@@ -1,4 +1,4 @@
-var x = d3.scaleLinear().domain([0, 100000000]).range([0, 300]);
+var x = d3.scaleLinear().domain([0, 100000000]).range([0, 500]);
 
 var data2010, data2015, data2010, data2015, data2017, overall;
 			
@@ -11,16 +11,30 @@ async function init() {
 	data2017 = await d3.csv("data/2017.csv");
 	
 	var svg = d3.select(".chart").append("svg")
-            .attr("width", 400)
-            .attr("height", 600)
+            .attr("width", 500)
+            .attr("height", 650)
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
 	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals);})
 	.attr("height", 20).attr("y", function(d, i) {return i * 30;});
+	
+	var items = [], i;
+	for (i = 0, i < 20; i++) { 
+		items.push(data2000[i].Country);
+	}
+	var y = d3.scaleOrdinal().domain(items).range([0, 500]);
+	
+	d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
+	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
 }
 			
 function set(n) {
-	d3.select(".chart").html = "";
+	d3.select(".chart").html("");
+	var i;
+	for (i = 1; i <= 6; i++) { 
+		d3.select("#btn" + i).attr("class", "");
+	}
+	
 	d3.select("#btn" + n).attr("class", "active");
 	if (n == 1) {
 		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
