@@ -1,5 +1,4 @@
 var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
-var slide = 1;
 var overall = [];
 var div;
 		
@@ -20,7 +19,7 @@ async function init() {
     .attr("class", "tooltip")				
     .style("opacity", 0);
 	
-	draw(1);
+	set(1);
 }
 
 function draw(n) {
@@ -52,7 +51,7 @@ function draw(n) {
 	
 	var y = d3.scaleOrdinal().domain(items).range([0, 350]);
 	
-	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
+	d3.select(".chart").append("g").attr("transform", "translate(70, 0)").call(d3.axisLeft(y));
 	d3.select(".chart").append("g").attr("transform", "translate(70, 400)").call(d3.axisBottom(x));
 	d3.select(".chart").append("text").attr("x", 220).attr("y", 460).text("Arrivals (Units in millions)");
 	//d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
@@ -69,14 +68,14 @@ function draw(n) {
 	var year = 2015;
 	if (n == 2) year = 2016;
 	if (n == 3) year = 2017;
-	svg.append("text").attr("x", 100).attr("y", 5).text("Top 10 Visited Countries in " + year).style("font-size", "32px");
+	svg.append("text").attr("x", 50).attr("y", 0).text("Top 10 Visited Countries in " + year).style("font-size", "20px");
 }
 			
 function set(n) {
 	slide = n;
 	d3.select(".chart").html("");
 	var i;
-	for (i = 1; i <= 5; i++) { 
+	for (i = 1; i <= 3; i++) { 
 		d3.select("#btn" + i).attr("class", "");
 	}
 	
@@ -86,7 +85,7 @@ function set(n) {
 }
 
 function next() {
-	if (slide < 5) {
+	if (slide < 4) {
 		slide++;
 		set(slide);
 	}
