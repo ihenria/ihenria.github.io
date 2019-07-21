@@ -6,8 +6,7 @@ var data2010, data2015, data2010, data2015, data2017, overall;
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
-
-			
+		
 async function init() {
 	overall = await d3.csv("data/overall.csv");
 	data2000 = await d3.csv("data/2000.csv");
@@ -22,7 +21,7 @@ async function init() {
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
 	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
-	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", getColor(d.region)).on("mouseover", function(d) {		
+	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", function(d){return getColor(d.Region);).on("mouseover", function(d) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
@@ -44,6 +43,13 @@ async function init() {
 	
 	d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
 	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
+	
+	svg.append("rect").attrs({"cx": 500; "cy": 500; "width": 10; "height": 10}).style("fill", "#4C5270")
+	svg.append("rect").attrs({"cx": 500; "cy": 520; "width": 10; "height": 10}).style("fill", "#F652A0")
+	svg.append("rect").attrs({"cx": 500; "cy": 540; "width": 10; "height": 10}).style("fill", "#36EEE0")
+	svg.append("text").attr("x", 515).attr("y", 500).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 515).attr("y", 520).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("text").attr("x", 515).attr("y", 540).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
 }
 			
 function set(n) {
