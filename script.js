@@ -1,11 +1,7 @@
 var x = d3.scaleLinear().domain([0, 100000000]).range([0, 300]);
 
 var data2010, data2015, data2010, data2015, data2017, overall;
-var svg = d3.select(".chart").append("svg")
-            .attr("width", 400)
-            .attr("height", 600)
-            .append("g")
-            .attr("transform", "translate(" + 50 + "," + 50 + ")");
+var svg = d3.select(".chart");
 			
 async function init() {
 	overall = await d3.csv("data/overall.csv");
