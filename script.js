@@ -2,6 +2,11 @@ var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
 var slide = 1;
 
 var data2010, data2015, data2010, data2015, data2017, overall;
+
+var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
+
 			
 async function init() {
 	overall = await d3.csv("data/overall.csv");
@@ -17,7 +22,19 @@ async function init() {
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
 	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
-	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", getColor(d.region));
+	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", getColor(d.region)).on("mouseover", function(d) {		
+            div.transition()		
+                .duration(200)		
+                .style("opacity", .9);		
+            div.html("Name: " + d.Country + "<br/>"  + "Arrivals: " + d.Arrivals + "<br/>" + "Region: " + d.Region + "<br/>" + "Income Level: " + d.Income)	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        });
 	
 	var items = [], i;
 	for (i = 0; i < 20; i++) { 
@@ -78,12 +95,14 @@ function previous() {
 }
 
 function getColor(region) {
-	case "Europe & Central Asia":
-	return "#4C5270";
-	case "North America":
-	return "#F652A0";
-	case "East Asia & Pacific":
-	return "#36EEE0";
-	case "Latin America & Caribbean":
-	return "#BCECE0";
+	switch (region) {
+		case "Europe & Central Asia":
+		return "#4C5270";
+		case "North America":
+		return "#F652A0";
+		case "East Asia & Pacific":
+		return "#36EEE0";
+		case "Latin America & Caribbean":
+		return "#BCECE0";
+	}
 }
