@@ -21,7 +21,7 @@ async function init() {
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
 	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
-	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", function(d){return getColor(d.Region);).on("mouseover", function(d) {
+	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
@@ -62,7 +62,36 @@ function set(n) {
 	
 	d3.select("#btn" + n).attr("class", "active");
 	if (n == 1) {
-		d3.select(".chart").selectAll("rect").data(data2000).enter().append("rect").attr("width", 19).attr("height", function(d){return d.Arrivals;});
+		var valueline = d3.line()
+		.x(function(d) { return x(d.Year); })
+		.y(function(d) { return y(d.Arrivals); });
+			
+		var svg = d3.select(".chart").append("svg")
+		.attr("width", 500)
+		.attr("height", 450)
+		.append("g")
+		.attr("transform", "translate(" + 50 + "," + 50 + ")");
+		
+		svg.append("path").data(overall).attr("class", "line").attr("d", valueline).on("mouseover", function(d) {
+				div.transition()		
+					.duration(200)		
+					.style("opacity", .9);		
+				div.html("Year: " + d.Year + "<br/>"  + "Arrivals: " + d.Arrivals)	
+					.style("left", (d3.event.pageX) + "px")		
+					.style("top", (d3.event.pageY - 28) + "px");	
+				})					
+			.on("mouseout", function(d) {		
+				div.transition()		
+					.duration(500)		
+					.style("opacity", 0);	
+			});
+		
+		var x = d3.scaleLinear().domain([2000, 2017]).range([0, 400]);
+		var y = d3.scaleLinear().domain([0, 1400]).range([0, 500]);
+		
+		d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
+		d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
+	
 	}
 	
 	if (n == 2) {
