@@ -1,21 +1,21 @@
-﻿Country,Arrivals
-France,74988000
-Spain,55914000
-United States,49206000
-China,46809000
-Italy,36513000
-United Kingdom,28039000
-Russian Federation,22201000
-Mexico,21915000
-Germany,21500000
-Turkey,20273000
-Austria,19952000
-Canada,18771000
-Ukraine,17631000
-Malaysia,16431000
-Poland,15200000
-"Hong Kong SAR, China",14773000
-Greece,14765000
-Thailand,11567000
-Netherlands,10012000
-Denmark,9587000
+﻿Country,Arrivals,Region,Income Group
+France,74988000,Europe & Central Asia,High income
+Spain,55914000,Europe & Central Asia,High income
+United States,49206000,North America,High income
+China,46809000,East Asia & Pacific,Upper middle income
+Italy,36513000,Europe & Central Asia,High income
+United Kingdom,28039000,Europe & Central Asia,High income
+Russian Federation,22201000,Europe & Central Asia,Upper middle income
+Mexico,21915000,Latin America & Caribbean,Upper middle income
+Germany,21500000,Europe & Central Asia,High income
+Turkey,20273000,Europe & Central Asia,Upper middle income
+Austria,19952000,Europe & Central Asia,High income
+Canada,18771000,North America,High income
+Ukraine,17631000,Europe & Central Asia,Lower middle income
+Malaysia,16431000,East Asia & Pacific,Upper middle income
+Poland,15200000,Europe & Central Asia,High income
+"Hong Kong SAR, China",14773000,East Asia & Pacific,High income
+Greece,14765000,Europe & Central Asia,High income
+Thailand,11567000,East Asia & Pacific,Upper middle income
+Netherlands,10012000,Europe & Central Asia,High income
+Denmark,9587000,Europe & Central Asia,High income
