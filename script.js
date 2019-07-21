@@ -1,10 +1,6 @@
 var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
 var slide = 1;
 var overall = [];
-
-var div = d3.select("body").append("div")	
-    .attr("class", "tooltip")				
-    .style("opacity", 0);
 		
 async function init() {
 	var data2000 = await d3.csv("data/2000.csv");
@@ -18,13 +14,18 @@ async function init() {
 	overall.push(data2010);
 	overall.push(data2015);
 	overall.push(data2017);
+	
+	var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
+	
 	draw(1);
 }
 
 function draw(n) {
 	var svg = d3.select(".chart").append("svg")
             .attr("width", 500)
-            .attr("height", 350)
+            .attr("height", 400)
             .append("g")
             .attr("transform", "translate(" + 70 + "," + 50 + ")");
 	svg.selectAll("rect").data(overall[n-1]).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
