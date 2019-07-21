@@ -1,4 +1,4 @@
-var x = d3.scaleLinear().domain([0, 100000000]).range([0, 500]);
+var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
 var slide = 1;
 
 var data2010, data2015, data2010, data2015, data2017, overall;
@@ -13,11 +13,11 @@ async function init() {
 	
 	var svg = d3.select(".chart").append("svg")
             .attr("width", 500)
-            .attr("height", 650)
+            .attr("height", 450)
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
-	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals);})
-	.attr("height", 20).attr("y", function(d, i) {return i * 30;});
+	svg.selectAll("rect").data(data2000).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
+	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", getColor(d.region));
 	
 	var items = [], i;
 	for (i = 0; i < 20; i++) { 
@@ -75,4 +75,15 @@ function previous() {
 		slide--;
 		set(slide);
 	}
+}
+
+function getColor(region) {
+	case "Europe & Central Asia":
+	return "#4C5270";
+	case "North America":
+	return "#F652A0";
+	case "East Asia & Pacific":
+	return "#36EEE0";
+	case "Latin America & Caribbean":
+	return "#BCECE0";
 }
