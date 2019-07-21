@@ -23,7 +23,7 @@ async function init() {
 
 function draw(n) {
 	var svg = d3.select(".chart").append("svg")
-            .attr("width", 500)
+            .attr("width", 400)
             .attr("height", 450)
             .append("g")
             .attr("transform", "translate(" + 50 + "," + 50 + ")");
@@ -44,11 +44,12 @@ function draw(n) {
 	
 	var items = [], i;
 	for (i = 0; i < 10; i++) { 
-		items.push(data[n-1][i].Country);
+		items.push(overall[n-1][i].Country);
 	}
-	var y = d3.scaleOrdinal().domain(items).range([0, 500]);
+	var y = d3.scaleOrdinal().domain(items).range([0, 400]);
 	
-	d3.select(".chart").append("g").attr("transform", "translate(50, 650)").call(d3.axisBottom(x));
+	d3.select(".chart").append("g").attr("transform", "translate(50, 400)").call(d3.axisBottom(x));
+	d3.select(".chart").append("g").attr("transform", "translate(50, 440)").text("Units in millions");
 	d3.select(".chart").append("g").attr("transform", "translate(0, 0)").call(d3.axisLeft(y));
 	
 	svg.append("rect").attr("cx", 400).attr("cy", 300).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
