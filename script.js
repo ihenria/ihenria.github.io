@@ -23,13 +23,13 @@ async function init() {
 
 function draw(n) {
 	var svg = d3.select(".chart").append("svg")
-            .attr("width", 400)
-            .attr("height", 450)
+            .attr("width", 500)
+            .attr("height", 350)
             .append("g")
-            .attr("transform", "translate(" + 50 + "," + 50 + ")");
+            .attr("transform", "translate(" + 80 + "," + 0 + ")");
 	svg.selectAll("rect").data(overall[n-1]).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
-	.attr("height", 20).attr("y", function(d, i) {return i * 30;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
-			console.log("hovered" + d);
+	.attr("height", 25).attr("y", function(d, i) {return i * 35;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
+			console.log(d);
             div.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
@@ -43,24 +43,18 @@ function draw(n) {
                 .style("opacity", 0);	
         });
 	
-	var items = [], i;
-	for (i = 0; i < 10; i++) { 
-		items.push(overall[n-1][i].Country);
-	}
-	var y = d3.scaleOrdinal().domain(items).range([0, 400]);
-	
 	d3.select(".chart").append("g").attr("transform", "translate(50, 400)").call(d3.axisBottom(x));
-	d3.select(".chart").append("g").attr("transform", "translate(50, 440)").text("Units in millions");
-	d3.select(".chart").append("g").attr("transform", "translate(50, 0)").call(d3.axisLeft(y));
+	d3.select(".chart").append("g").attr("x", 150).attr("y", 420).text("Units in millions");
+	d3.select(".chart").append("g").data(overall[n-1]).text(function(d) {return d.Country}).attr("x", 0).attr("y". function(d, i) {return i * 35});
 	
-	svg.append("rect").attr("x", 300).attr("y", 300).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
-	svg.append("rect").attr("x", 300).attr("y", 320).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
-	svg.append("rect").attr("x", 300).attr("y", 340).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
-	svg.append("rect").attr("x", 300).attr("y", 360).attr("width", 10).attr("height", 10).style("fill", "#BCECE0")
-	svg.append("text").attr("x", 315).attr("y", 300).text("Europe & Central Asia").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 315).attr("y", 320).text("North America").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 315).attr("y", 340).text("East Asia & Pacific").style("font-size", "15px").attr("alignment-baseline","middle")
-	svg.append("text").attr("x", 315).attr("y", 360).text("Latin America & Caribbean").style("font-size", "15px").attr("alignment-baseline","middle")
+	svg.append("rect").attr("x", 300).attr("y", 250).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
+	svg.append("rect").attr("x", 300).attr("y", 270).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
+	svg.append("rect").attr("x", 300).attr("y", 290).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
+	svg.append("rect").attr("x", 300).attr("y", 310).attr("width", 10).attr("height", 10).style("fill", "#BCECE0")
+	svg.append("text").attr("x", 315).attr("y", 250).text("Europe & Central Asia").style("font-size", "15px");
+	svg.append("text").attr("x", 315).attr("y", 270).text("North America").style("font-size", "15px");
+	svg.append("text").attr("x", 315).attr("y", 290).text("East Asia & Pacific").style("font-size", "15px");
+	svg.append("text").attr("x", 315).attr("y", 310).text("Latin America & Caribbean").style("font-size", "15px");
 }
 			
 function set(n) {
