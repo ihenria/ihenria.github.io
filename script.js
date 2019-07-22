@@ -1,15 +1,12 @@
-var x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
+var x = d3.scaleLinear().domain([0, 90]).range([0, 500]);
+var y = d3.scaleLinear().domain([60, 0]).range([0, 350]);
+var color = d3.scaleLinear().domain([4, 36]).range(["green", "red"]);
 var overall = [];
 var div, svg;
+var formatComma = d3.format(",");
 		
 async function init() {
-	var data2015 = await d3.csv("data/2015.csv");
-	var data2016 = await d3.csv("data/2016.csv");
-	var data2017 = await d3.csv("data/2017.csv");
-	
-	overall.push(data2015);
-	overall.push(data2016);
-	overall.push(data2017);
+	overall = await d3.csv("data/chicago.csv");
 	
 	div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
@@ -19,17 +16,21 @@ async function init() {
 }
 
 function draw(n) {
+	var highlight = 1;
+	if (n == 2) highlight = 2;
+	if (n == 3) highlight = 58;
+	if (n == 4) highlight = 78;
 	svg = d3.select(".chart").append("svg")
-            .attr("width", 500)
-            .attr("height", 400)
+            .attr("width", 600)
+            .attr("height", 410)
             .append("g")
-            .attr("transform", "translate(" + 70 + "," + 50 + ")");
-	svg.selectAll("rect").data(overall[n-1]).enter().append("rect").attr("class", "bar").attr("width", function(d){return x(d.Arrivals/1000000);})
-	.attr("height", 25).attr("y", function(d, i) {return i * 35;}).attr("fill", function(d){return getColor(d.Region);}).on("mouseover", function(d) {
+            .attr("transform", "translate(" + 70 + "," + 60 + ")");
+	svg.selectAll("circle").data(overall).enter().append("circle").attr("cx", function(d){return x(d.PerCapitaIncome/1000);})
+	.attr("r", function (d, i) {if (i == highlight-1) return 15; return 6;}).attr("cy", function(d) {return y(d.NoHighSchoolDiploma);}).style("stroke", "#496d89").style("stroke-width", function(d, i) {if (i == highlight-1) return "4"; return "2";}).style("fill", "white").on("mouseover", function(d) {
             div.transition()		
                 .duration(20)		
                 .style("opacity", .9);		
-            div.html("Name: " + d.Country + "<br/>"  + "Arrivals: " + d.Arrivals + "<br/>" + "Region: " + d.Region + "<br/>" + "Income Level: " + d.Income)	
+            div.html("Name: " + d.Name + "<br/>" + "Per Capita Income: $" + formatComma(d.PerCapitaIncome) + "<br />" + "Aged 25+ w/o High School Diploma: " + d.NoHighSchoolDiploma + "%<br/>"  + "Percent Below Poverty: " + d.PercentBelowPoverty + "%<br/>" + "Aged 25+ Unemployed: " + d.Unemployed + "%<br/>")	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             })					
@@ -39,91 +40,67 @@ function draw(n) {
                 .style("opacity", 0);	
         });
 	
-	var i;
-	var items = [];
-	for (i = 1; i <= 10; i++) { 
-		items.push(overall[n-1][i-1]);
-	}
-	
-	var y = d3.scaleOrdinal().domain(items).range([0, 350]);
-	
-	d3.select(".chart").append("g").attr("transform", "translate(70, 50)").call(d3.axisLeft(y));
-	d3.select(".chart").append("g").attr("transform", "translate(70, 400)").call(d3.axisBottom(x));
-	d3.select(".chart").append("text").attr("x", 220).attr("y", 460).text("Arrivals (Units in millions)");
+
+	d3.select(".chart").append("g").attr("transform", "translate(70, 60)").call(d3.axisLeft(y));
+	d3.select(".chart").append("g").attr("transform", "translate(70, 410)").call(d3.axisBottom(x));
+	d3.select(".chart").append("text").attr("x", 220).attr("y", 440).text("Per Capita Income (in thousandthousand)").style("font-size", "10px");
+	d3.select(".chart").append("text").attr("x", 5).attr("y", 200).text("Population aged 26+ without high school diploma (%)").style("font-size", "10px").attr("transform", "rotate(90)").style("text-anchor", "start");;
 	//d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
 	
-	svg.append("rect").attr("x", 300).attr("y", 250).attr("width", 10).attr("height", 10).style("fill", "#4C5270")
-	svg.append("rect").attr("x", 300).attr("y", 270).attr("width", 10).attr("height", 10).style("fill", "#F652A0")
-	svg.append("rect").attr("x", 300).attr("y", 290).attr("width", 10).attr("height", 10).style("fill", "#36EEE0")
-	svg.append("rect").attr("x", 300).attr("y", 310).attr("width", 10).attr("height", 10).style("fill", "#BCECE0")
-	svg.append("text").attr("x", 315).attr("y", 260).text("Europe & Central Asia").style("font-size", "15px");
-	svg.append("text").attr("x", 315).attr("y", 280).text("North America").style("font-size", "15px");
-	svg.append("text").attr("x", 315).attr("y", 300).text("East Asia & Pacific").style("font-size", "15px");
-	svg.append("text").attr("x", 315).attr("y", 320).text("Latin America & Caribbean").style("font-size", "15px");
+	svg.append("text").attr("x", 50).attr("y", 0).text("Chicago Neighborhood Poverty and Education").style("font-size", "17px");
 	
-	var year = 2015;
-	if (n == 2) year = 2016;
-	if (n == 3) year = 2017;
-	svg.append("text").attr("x", 50).attr("y", 0).text("Top 10 Visited Countries in " + year).style("font-size", "20px");
 	annotate(n);
 }
 
 function annotate(n) {
 	if (n == 1) {
-		svg.append("circle").attr("cx", 300).attr("cy", 250).attr("r", 5);
-		var line = d3.svg.line()
-                    .x(function(d) { return d[0]; })
-                    .y(function(d) { return d[1]; })
-                    .interpolate('linear');
-		var shapeCoords = [
-                  [300, 250], [360, 250], [360, 300]               
-        ];
+		var line = svg.append("path")
+					.style("stroke", "lightblue")
+					.style("stroke-dasharray", "10,10")
+					.attr("d", "M 60 190 L 236 190");
 		
-		svg.data(shapeCoords)
-                .append('path')
-                .attr('d', line(shapeCoords) + 'Z')
-                .style('stroke-width', 1)
-                .style('stroke', 'steelblue');
-		
-		svg.append("text").attr("x", 315).attr("y", 320).text("France has consistently been the most visited countries in the world in recent years.").style("font-size", "15px");
+		svg.append("text").attr("x", 250).attr("y", 180).text("The poorest community measured by").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 250).attr("y", 195).text("Per Capita Income is Riverdale.").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 250).attr("y", 210).text("It is ranked 19 in people aged 25+").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 250).attr("y", 225).text("without high school diploma.").attr("width", 100).style("font-size", "12px");
 	}
 	
 	if (n == 2) {
-		svg.append("circle").attr("cx", 300).attr("cy", 250).attr("r", 5);
-		var line = d3.svg.line()
-                    .x(function(d) { return d[0]; })
-                    .y(function(d) { return d[1]; })
-                    .interpolate('linear');
-		var shapeCoords = [
-                  [300, 250], [360, 250], [360, 300]               
-        ];
+		var line = svg.append("path")
+					.style("stroke", "lightblue")
+					.style("stroke-dasharray", "10,10")
+					.attr("d", "M 75 30 L 236 30"); 
 		
-		svg.data(shapeCoords)
-                .append('path')
-                .attr('d', line(shapeCoords) + 'Z')
-                .style('stroke-width', 1)
-                .style('stroke', 'steelblue');
-		
-		svg.append("text").attr("x", 315).attr("y", 320).text("Turkey sees a significant drop in number of arrivals, down 23.7% from 2016. It is also the only country with decreased visitors from 2015 to 2016.").style("font-size", "15px");
+		svg.append("text").attr("x", 240).attr("y", 20).text("The community where the largest").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 240).attr("y", 35).text("percentage of population aged 25+").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 240).attr("y", 50).text("have no school diploma is South").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 240).attr("y", 65).text("Lawndale. It is the second poorest").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 240).attr("y", 80).text("comunity by Per Capita Income").attr("width", 100).style("font-size", "12px");
+
 	}
 	
 	if (n == 3) {
-		svg.append("circle").attr("cx", 300).attr("cy", 250).attr("r", 5);
-		var line = d3.svg.line()
-                    .x(function(d) { return d[0]; })
-                    .y(function(d) { return d[1]; })
-                    .interpolate('linear');
-		var shapeCoords = [
-                  [300, 250], [360, 250], [360, 300]               
-        ];
+				var line = svg.append("path")
+					.style("stroke", "lightblue")
+					.style("stroke-dasharray", "10,10")
+					.attr("d", "M 175 237 L 276 237"); 
 		
-		svg.data(shapeCoords)
-                .append('path')
-                .attr('d', line(shapeCoords) + 'Z')
-                .style('stroke-width', 1)
-                .style('stroke', 'steelblue');
+		svg.append("text").attr("x", 280).attr("y", 210).text("This is the Chicago Average.").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 225).text("Per capita annual income is $28,202,").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 240).text("and 19.5% of people aged 25+ are").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 255).text("without high school diploma.").attr("width", 100).style("font-size", "12px");
+	}
+	
+	if (n == 4) {
 		
-		svg.append("text").attr("x", 315).attr("y", 320).text("In 2017, Spain overtook the United States to become the #2 most visited country in the world").style("font-size", "15px");
+		var line = svg.append("path")
+					.style("stroke", "lightblue")
+					.style("stroke-dasharray", "10,10")
+					.attr("d", "M 492 320 L 492 200"); 
+		svg.append("text").attr("x", 315).attr("y", 150).text("Finally, the community with").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 315).attr("y", 165).text("the highest per capita income is").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 315).attr("y", 180).text("also the best educated community:").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 315).attr("y", 195).text("Near North Side.").attr("width", 100).style("font-size", "12px");
 	}
 }
 			
@@ -131,7 +108,7 @@ function set(n) {
 	slide = n;
 	d3.select(".chart").html("");
 	var i;
-	for (i = 1; i <= 3; i++) { 
+	for (i = 1; i <= 4; i++) { 
 		d3.select("#btn" + i).attr("class", "");
 	}
 	
@@ -151,18 +128,5 @@ function previous() {
 	if (slide > 1) {
 		slide--;
 		set(slide);
-	}
-}
-
-function getColor(region) {
-	switch (region) {
-		case "Europe & Central Asia":
-		return "#4C5270";
-		case "North America":
-		return "#F652A0";
-		case "East Asia & Pacific":
-		return "#36EEE0";
-		case "Latin America & Caribbean":
-		return "#BCECE0";
 	}
 }
