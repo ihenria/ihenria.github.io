@@ -21,7 +21,7 @@ function draw(n) {
 	if (n == 3) highlight = 58;
 	if (n == 4) highlight = 78;
 	svg = d3.select(".chart").append("svg")
-            .attr("width", 640)
+            .attr("width", 655)
             .attr("height", 410)
             .append("g")
             .attr("transform", "translate(" + 70 + "," + 60 + ")");
@@ -31,7 +31,8 @@ function draw(n) {
 
 	var circles = svg.selectAll("circle").data(newArr).enter().append("circle").attr("cx", function(d){return x(d.PerCapitaIncome/1000);})
 	.attr("r", function (d, i) {if (i == overall.length-1) return 15; return 6;}).attr("cy", function(d) {return y(d.NoHighSchoolDiploma);}).style("stroke", function(d, i) {if (i == overall.length-1) return "red"; return "#496d89";}).style("stroke-width", function(d, i) {if (i == overall.length-1) return "4"; return "2";}).style("fill", "white");
-	circles.on("mouseover", function(d) {
+	circles.on("mouseover", function(d, x, m) {
+			d3.select(this).style("fill", "#fdbfa6");
             div.transition()		
                 .duration(20)		
                 .style("opacity", .9);		
@@ -39,7 +40,8 @@ function draw(n) {
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
             })					
-        .on("mouseout", function(d) {		
+        .on("mouseout", function(d) {
+			d3.select(this).style("fill", "white");			
             div.transition()		
                 .duration(500)		
                 .style("opacity", 0);	
@@ -53,7 +55,7 @@ function draw(n) {
 	d3.select(".chart").append("text").attr("x", -220).attr("y", 40).text("Population aged 26+ without high school diploma (%)").style("font-size", "10px").attr("transform", "rotate(-90)").style("text-anchor", "middle");
 	//d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
 	
-	svg.append("text").attr("x", 50).attr("y", 0).text("Chicago Neighborhood Poverty and Education").style("font-size", "17px");
+	svg.append("text").attr("x", 50).attr("y", 0).text("Education and Poverty in Chicago").style("font-size", "17px");
 	
 	annotate(n);
 }
@@ -91,10 +93,10 @@ function annotate(n) {
 					.style("stroke-dasharray", "10,10")
 					.attr("d", "M 175 237 L 276 237"); 
 		
-		svg.append("text").attr("x", 280).attr("y", 210).text("This is the Chicago average.").attr("width", 100).style("font-size", "12px");
-		svg.append("text").attr("x", 280).attr("y", 225).text("Per capita annual income is $28,202,").attr("width", 100).style("font-size", "12px");
-		svg.append("text").attr("x", 280).attr("y", 240).text("and 19.5% of people aged 25+ are").attr("width", 100).style("font-size", "12px");
-		svg.append("text").attr("x", 280).attr("y", 255).text("without high school diploma.").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 220).text("This is the Chicago average.").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 235).text("Per capita annual income is $28,202,").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 250).text("and 19.5% of people aged 25+ are").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 280).attr("y", 265).text("without high school diploma.").attr("width", 100).style("font-size", "12px");
 	}
 	
 	if (n == 4) {
@@ -102,11 +104,11 @@ function annotate(n) {
 		var line = svg.append("path")
 					.style("stroke", "lightblue")
 					.style("stroke-dasharray", "10,10")
-					.attr("d", "M 492 320 L 492 200"); 
-		svg.append("text").attr("x", 355).attr("y", 145).text("Finally, the community with the").attr("width", 100).style("font-size", "12px");
-		svg.append("text").attr("x", 355).attr("y", 160).text("highest per capita income is").attr("width", 100).style("font-size", "12px");
-		svg.append("text").attr("x", 355).attr("y", 175).text("also the best educated community:").attr("width", 100).style("font-size", "12px");
-		svg.append("text").attr("x", 355).attr("y", 190).text("Near North Side.").attr("width", 100).style("font-size", "12px");
+					.attr("d", "M 492 315 L 492 195"); 
+		svg.append("text").attr("x", 375).attr("y", 145).text("Finally, the community with the").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 375).attr("y", 160).text("highest per capita income is").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 375).attr("y", 175).text("also the best educated community:").attr("width", 100).style("font-size", "12px");
+		svg.append("text").attr("x", 375).attr("y", 190).text("Near North Side.").attr("width", 100).style("font-size", "12px");
 	}
 }
 			
