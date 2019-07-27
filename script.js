@@ -28,6 +28,7 @@ function draw(n) {
 	var newArr = overall.slice();
 	var highlighted = newArr.splice(highlight - 1, 1);
 	newArr.push(highlighted[0]);
+
 	var circles = svg.selectAll("circle").data(newArr).enter().append("circle").attr("cx", function(d){return x(d.PerCapitaIncome/1000);})
 	.attr("r", function (d, i) {if (i == overall.length-1) return 15; return 6;}).attr("cy", function(d) {return y(d.NoHighSchoolDiploma);}).style("stroke", function(d, i) {if (i == overall.length-1) return "red"; return "#496d89";}).style("stroke-width", function(d, i) {if (i == overall.length-1) return "4"; return "2";}).style("fill", "white");
 	circles.on("mouseover", function(d) {
@@ -48,6 +49,7 @@ function draw(n) {
 	d3.select(".chart").append("g").attr("transform", "translate(70, 60)").call(d3.axisLeft(y));
 	d3.select(".chart").append("g").attr("transform", "translate(70, 410)").call(d3.axisBottom(x));
 	d3.select(".chart").append("text").attr("x", 220).attr("y", 440).text("Per Capita Income (in thousand)").style("font-size", "10px");
+	d3.select(".chart").append("text").attr("x", 77).attr("y", 405).text("Hover over a circle for details").style("font-size", "7px").style("fill", "#999");
 	d3.select(".chart").append("text").attr("x", -220).attr("y", 40).text("Population aged 26+ without high school diploma (%)").style("font-size", "10px").attr("transform", "rotate(-90)").style("text-anchor", "middle");
 	//d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
 	
