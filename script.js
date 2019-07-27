@@ -55,7 +55,7 @@ function draw(n) {
 	d3.select(".chart").append("text").attr("x", -220).attr("y", 40).text("Population aged 26+ without high school diploma (%)").style("font-size", "10px").attr("transform", "rotate(-90)").style("text-anchor", "middle");
 	//d3.select(".chart").append("text").data(overall[n-1]).text(function(d) {return d.Country;}).attr("x", 0).attr("y", function(d, i) {return i * 35;});
 	
-	svg.append("text").attr("x", 50).attr("y", 0).text("Education and Poverty in Chicago").style("font-size", "17px");
+	svg.append("text").attr("x", 50).attr("y", 0).text("Education and Wealth in Chicago").style("font-size", "17px");
 	
 	annotate(n);
 }
