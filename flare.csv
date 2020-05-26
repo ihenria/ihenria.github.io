@@ -1,4 +1,6 @@
 id,value
+old,
+old.topic0,
 old.topic0.best,0.005214929
 old.topic0.great,0.005046278
 old.topic0.sauce,0.0050091827
@@ -9,6 +11,7 @@ old.topic0.night,0.004546042
 old.topic0.montagu,0.0039956225
 old.topic0.day,0.003984904
 old.topic0.cheese,0.003984313
+old.topic1,
 old.topic1.great,0.0063599073
 old.topic1.just,0.00573818
 old.topic1.best,0.005386664
@@ -19,6 +22,7 @@ old.topic1.bread,0.0043653906
 old.topic1.delicious,0.0043633757
 old.topic1.cheap,0.0042733164
 old.topic1.like,0.0038668055
+old.topic2,
 old.topic2.delicious,0.0078079132
 old.topic2.bread,0.006034797
 old.topic2.best,0.0057522873
@@ -29,6 +33,7 @@ old.topic2.definitely,0.0045993202
 old.topic2.great,0.0045502875
 old.topic2.food,0.004510919
 old.topic2.soup,0.0045002378
+old.topic3,
 old.topic3.bread,0.0058871685
 old.topic3.time,0.0054883347
 old.topic3.try,0.005126838
@@ -39,6 +44,7 @@ old.topic3.really,0.004654013
 old.topic3.just,0.004618673
 old.topic3.food,0.004383336
 old.topic3.don,0.0040693623
+old.topic4,
 old.topic4.best,0.005901886
 old.topic4.bread,0.005447877
 old.topic4.great,0.00523619
@@ -49,6 +55,7 @@ old.topic4.really,0.0041906005
 old.topic4.club,0.0041898275
 old.topic4.line,0.0041880896
 old.topic4.chicken,0.004037115
+old.topic5,
 old.topic5.just,0.006100285
 old.topic5.bread,0.005681802
 old.topic5.really,0.005590198
@@ -59,6 +66,7 @@ old.topic5.pretty,0.0042851535
 old.topic5.24,0.004036991
 old.topic5.great,0.0040247804
 old.topic5.club,0.004018225
+old.topic6,
 old.topic6.tuna,0.0056382813
 old.topic6.bread,0.0050539286
 old.topic6.chicken,0.0049843374
@@ -69,6 +77,8 @@ old.topic6.day,0.004629715
 old.topic6.time,0.0046257284
 old.topic6.club,0.0046223337
 old.topic6.just,0.004551206
+new,
+new.topic0,
 new.topic0.earl,0.00783131
 new.topic0.best,0.007279191
 new.topic0.great,0.0061149443
@@ -79,6 +89,7 @@ new.topic0.just,0.005131343
 new.topic0.food,0.00505457
 new.topic0.long,0.0047582556
 new.topic0.wait,0.004543855
+new.topic1,
 new.topic1.line,0.0076027913
 new.topic1.earl,0.0065313214
 new.topic1.long,0.006015654
@@ -89,6 +100,7 @@ new.topic1.bread,0.0052074855
 new.topic1.just,0.005186354
 new.topic1.really,0.0051496956
 new.topic1.great,0.0050057885
+new.topic2,
 new.topic2.earl,0.006994086
 new.topic2.just,0.00604641
 new.topic2.best,0.005963191
@@ -99,6 +111,7 @@ new.topic2.delicious,0.0046425997
 new.topic2.time,0.004569298
 new.topic2.try,0.0044612843
 new.topic2.great,0.0044551687
+new.topic3,
 new.topic3.tuna,0.0076260567
 new.topic3.earl,0.0059370506
 new.topic3.food,0.005336284
@@ -109,6 +122,7 @@ new.topic3.time,0.004515901
 new.topic3.line,0.004460923
 new.topic3.delicious,0.004323973
 new.topic3.great,0.0042762444
+new.topic4,
 new.topic4.earl,0.007883694
 new.topic4.delicious,0.0068454323
 new.topic4.chicken,0.006760974
@@ -119,6 +133,7 @@ new.topic4.eat,0.0053970926
 new.topic4.great,0.005218505
 new.topic4.time,0.005113378
 new.topic4.got,0.0049341195
+new.topic5,
 new.topic5.tuna,0.006500691
 new.topic5.earl,0.0062837442
 new.topic5.best,0.0061557395
@@ -129,6 +144,7 @@ new.topic5.food,0.0046821325
 new.topic5.chicken,0.0046151266
 new.topic5.great,0.0044851666
 new.topic5.love,0.004362125
+new.topic6,
 new.topic6.great,0.008905253
 new.topic6.earl,0.0070987646
 new.topic6.love,0.007079843
